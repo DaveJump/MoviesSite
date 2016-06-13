@@ -1,0 +1,13 @@
+doctype
+html
+	head
+		meta(charset="utf-8")
+		title #{title}
+		include ./includes/head
+		style.
+			.dl-horizontal dt,.dl-horizontal dd{
+				margin-bottom: 5px;
+			}
+	body
+		include ./includes/header
+		block content

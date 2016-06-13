@@ -1,0 +1,32 @@
+{
+  "name": "movies-site",
+  "version": "1.0.0",
+  "description": "a simple movies site for viewing and managing",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaveJump/MoviesSite.git"
+  },
+  "keywords": [
+    "movies",
+    "managing",
+    "viewing"
+  ],
+  "author": "DaveLee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DaveJump/MoviesSite/issues"
+  },
+  "homepage": "https://github.com/DaveJump/MoviesSite#readme",
+  "devDependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "moment": "^2.13.0",
+    "mongoose": "^4.4.20",
+    "underscore": "^1.8.3"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "movies-site",
+  "description": "a simple movies site for viewing and managing",
+  "main": "app.js",
+  "authors": [
+    "DaveLee"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "movies",
+    "managing",
+    "viewing"
+  ],
+  "homepage": "https://github.com/DaveJump/MoviesSite",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
