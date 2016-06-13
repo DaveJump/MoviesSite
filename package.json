@@ -24,6 +24,11 @@
   "devDependencies": {
     "body-parser": "^1.15.1",
     "express": "^4.13.4",
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-concurrent": "^2.3.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-nodemon": "^0.4.2",
     "jade": "^1.11.0",
     "moment": "^2.13.0",
     "mongoose": "^4.4.20",

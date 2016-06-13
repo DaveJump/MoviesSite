@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var Movie = require('./models/movie');
 var _ = require('underscore');
-var port = process.env.PORT || 3000;
+var port = 3000;
 var app = express();
 
 //链接本地mongodb
@@ -58,19 +58,21 @@ app.get('/movie/:id',function(req,res){
 });
 
 //后台录入页
-app.get('/admin/movie',function(req,res){
+app.get('/admin/new',function(req,res){
 	res.render('admin',{
 		title: '电影录入',
-		movie: {
-			title: '',
-			director: '',
-			country: '',
-			release_date: '',
-			poster: '',
-			flash: '',
-			summary: '',
-			language: ''
-		}
+		movie: [
+			{
+				title: '',
+				director: '',
+				country: '',
+				release_date: '',
+				poster: '',
+				flash: '',
+				summary: '',
+				language: ''
+			}
+		]
 	});
 });
 
@@ -92,7 +94,7 @@ app.post('/admin/movie/new',function(req,res){
 				if(err){
 					console.log(err);
 				}
-				res.redirect('/movie/' + movie._id);
+				res.redirect('/movie/list');
 			});
 		});
 
@@ -112,7 +114,7 @@ app.post('/admin/movie/new',function(req,res){
 			if(err){
 				console.log(err);
 			}
-			res.redirect('/movie/' + movie._id);
+			res.redirect('/movie/list');
 		});
 	}
 });
