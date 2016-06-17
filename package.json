@@ -21,9 +21,13 @@
     "url": "https://github.com/DaveJump/MoviesSite/issues"
   },
   "homepage": "https://github.com/DaveJump/MoviesSite#readme",
-  "devDependencies": {
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.1",
+    "connect-mongo": "^1.2.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "grunt": "^1.0.1",
     "grunt-cli": "^1.2.0",
     "grunt-concurrent": "^2.3.0",
@@ -32,6 +36,7 @@
     "jade": "^1.11.0",
     "moment": "^2.13.0",
     "mongoose": "^4.4.20",
+    "morgan": "^1.7.0",
     "underscore": "^1.8.3"
   }
 }

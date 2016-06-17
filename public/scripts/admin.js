@@ -7,9 +7,8 @@ $(function(){
 
 		$.ajax({
 			type: 'DELETE',
-			url: '/admin/list?id=' + id,
+			url: '/admin/movie/list?id=' + id,
 			success: function(result){
-				console.log(result);
 				if(result.success === 1){
 					if(tr.length > 0){
 						tr.remove();

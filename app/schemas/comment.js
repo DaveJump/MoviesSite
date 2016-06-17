@@ -1,14 +1,30 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
 
-var MovieSchema = new mongoose.Schema({
-	title: String,
-	director: String,
-	language: String,
-	country: String,
-	summary: String,
-	flash: String,
-	poster: String,
-	release_date: Number,
+var CommentSchema = new Schema({
+	movie: {
+		type: ObjectId,
+		ref: 'Movie'
+	},
+	from: {
+		type: ObjectId,
+		ref: 'User'
+	},
+	reply: [
+		{
+			from: {
+				type: ObjectId,
+				ref: 'User'
+			},
+			to: {
+				type: ObjectId,
+				ref: 'User'
+			},
+			content: String
+		}
+	],
+	content: String,
 	meta: {
 		createAt: {
 			type: Date,
@@ -22,20 +38,17 @@ var MovieSchema = new mongoose.Schema({
 });
 
 //保存数据之前的操作
-MovieSchema.pre('save',function(next){
-	//判断数据是否为新的(即数据库当中有没有该数据)
+CommentSchema.pre('save',function(next){
 	if(this.isNew){
 		this.meta.createAt = this.meta.updateAt = Date.now();
 	}else{
 		this.meta.updateAt = Date.now();
 	}
-
-	//该静态方法不与数据库直接交互，只有被Model实例化后才会拥有并调用
 	next();
 });
 
 //设置schema实例的静态方法
-MovieSchema.statics = {
+CommentSchema.statics = {
 	//查询所有数据按更新时间排序,并执行回调函数
 	fetch: function(callback){
 		return this
@@ -47,11 +60,16 @@ MovieSchema.statics = {
 	//根据id查询单条数据
 	findById: function(id,callback){
 		return this
-			.find({_id: id})
+			.findOne({_id: id})
 			.sort('meta.updateAt')
 			.exec(callback);
 	}
 }
 
+//实例方法
+CommentSchema.methods = {
+	
+}
+
 //暴露schema实例
-module.exports = MovieSchema;
+module.exports = CommentSchema;
