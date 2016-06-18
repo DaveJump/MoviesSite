@@ -25,6 +25,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.1",
     "connect-mongo": "^1.2.0",
+    "connect-multiparty": "^2.0.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
@@ -32,11 +33,15 @@
     "grunt-cli": "^1.2.0",
     "grunt-concurrent": "^2.3.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-mocha-test": "^0.12.7",
     "grunt-nodemon": "^0.4.2",
     "jade": "^1.11.0",
+    "mocha": "^2.5.3",
     "moment": "^2.13.0",
     "mongoose": "^4.4.20",
     "morgan": "^1.7.0",
+    "multipart": "^0.1.5",
+    "should": "^9.0.2",
     "underscore": "^1.8.3"
   }
 }

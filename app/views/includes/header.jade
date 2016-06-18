@@ -1,7 +1,14 @@
 .container(style="padding-top: 50px")
 	.row
-		.page-header
-			h1 #{title}
+		.page-header(style="padding: 0 0 20px 0;margin: 40px 0 30px 0").clearfix
+			.col-md-4
+				h2(style="margin: 0") #{title}
+			.col-md-8.clearfix
+				form(method="get",action="/results")
+					.input-group.col-sm-4.pull-right
+						input.form-control(type="text",name="q")
+						span.input-group-btn
+							button.btn.btn-default(type="submit") 搜索
 
 .navbar.navbar-default.navbar-fixed-top
 	.container

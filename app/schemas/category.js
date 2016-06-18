@@ -2,23 +2,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
-var MovieSchema = new Schema({
-	title: String,
-	director: String,
-	language: String,
-	country: String,
-	summary: String,
-	flash: String,
-	poster: String,
-	release_date: Number,
-	pv: {
-		type: Number,
-		default: 0
-	},
-	category: {
-		type: ObjectId,
-		ref: 'Category'
-	},
+var CategorySchema = new Schema({
+	name: String,
+	movies: [
+		{
+			type: ObjectId,
+			ref: 'Movie'
+		}
+	],
 	meta: {
 		createAt: {
 			type: Date,
@@ -32,7 +23,7 @@ var MovieSchema = new Schema({
 });
 
 //保存数据之前的操作
-MovieSchema.pre('save',function(next){
+CategorySchema.pre('save',function(next){
 	//判断数据是否为新的(即数据库当中有没有该数据)
 	if(this.isNew){
 		this.meta.createAt = this.meta.updateAt = Date.now();
@@ -45,7 +36,7 @@ MovieSchema.pre('save',function(next){
 });
 
 //设置schema实例的静态方法
-MovieSchema.statics = {
+CategorySchema.statics = {
 	//查询所有数据按更新时间排序,并执行回调函数
 	fetch: function(callback){
 		return this
@@ -64,4 +55,4 @@ MovieSchema.statics = {
 }
 
 //暴露schema实例
-module.exports = MovieSchema;
+module.exports = CategorySchema;

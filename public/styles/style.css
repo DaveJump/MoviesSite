@@ -1,0 +1,14 @@
+dl.dl-horizontal dd{
+	text-align: left !important;
+}
+dl.dl-horizontal dt{
+	padding-right: 20px !important;
+	width: 80px !important;
+}
+dl.dl-horizontal dd{
+	margin-left: 0px;
+}
+.d_poster img{
+	max-width: 100%;
+	height: auto;
+}

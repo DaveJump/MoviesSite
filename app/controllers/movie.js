@@ -1,12 +1,19 @@
 var Movie = require('../models/movie');
+var Category = require('../models/category');
 var Comment = require('../models/comment');
 var _ = require('underscore');
+var fs = require('fs');
+var path = require('path');
 
 //电影详细信息页
 exports.detail = function(req,res){
 	var id = req.params.id;
 
 	Movie.findById(id,function(err,movie){
+		Movie.update({_id: id},{$inc: {pv: 1}},function(err){
+			if(err) console.log(err);
+		});
+		
 		Comment
 			.find({movie: id})
 			.populate('from','name')
@@ -24,21 +31,38 @@ exports.detail = function(req,res){
 
 //后台录入页
 exports.new = function(req,res){
-	res.render('admin',{
-		title: '电影录入',
-		movie: [
-			{
-				title: '',
-				director: '',
-				country: '',
-				release_date: '',
-				poster: '',
-				flash: '',
-				summary: '',
-				language: ''
-			}
-		]
+	Category.find({},function(err,categories){
+		res.render('admin',{
+			title: '电影录入',
+			categories: categories,
+			movie: {}
+		});
 	});
+}
+
+//海报上传
+exports.savePoster = function(req,res,next){
+	var posterData = req.files.poster;
+	console.log(posterData)
+	var filePath = posterData.path;
+	var originalFilename = posterData.originalFilename;
+
+	if(originalFilename){
+		fs.readFile(filePath,function(err,data){
+			var timestamp = Date.now();
+			var type = posterData.type.split('/')[1];
+			var poster = timestamp + '.' + type;
+			var newPath = path.join(__dirname,'../../','/public/upload/' + poster);
+
+			fs.writeFile(newPath,data,function(){
+				req.poster = poster;
+				next();
+			})
+		});
+
+	}else{
+		next();
+	}
 }
 
 //后台更新操作
@@ -47,8 +71,12 @@ exports.save = function(req,res){
 	var movieObj = req.body.movie;
 	var _movie;
 
+	if(req.poster){
+		movieObj.poster = req.poster;
+	}
+
 	//如果存在id,则证明该条电影详细信息数据存在于数据库中，此时就要执行更新操作
-	if(id !== 'undefined'){
+	if(id){
 		Movie.findById(id,function(err,movie){
 			if(err){
 				console.log(err);
@@ -59,27 +87,25 @@ exports.save = function(req,res){
 				if(err){
 					console.log(err);
 				}
-				res.redirect('/admin/list');
+				res.redirect('/admin/movie/list');
 			});
 		});
 
 	}else{
-		_movie = new Movie({
-			title: movieObj.title,
-			director: movieObj.director,
-			country: movieObj.country,
-			language: movieObj.language,
-			release_date: movieObj.release_date,
-			summary: movieObj.summary,
-			flash: movieObj.flash,
-			poster: movieObj.poster
-		});
+		_movie = new Movie(movieObj);
+
+		var categoryId = _movie.category;
 
 		_movie.save(function(err,movie){
 			if(err){
 				console.log(err);
 			}
-			res.redirect('/admin/list');
+			Category.findById(categoryId,function(err,category){
+				category.movies.push(movie._id);
+				category.save(function(err,category){
+					res.redirect('/admin/movie/list');
+				});
+			});
 		});
 	}
 }
@@ -89,10 +115,13 @@ exports.update = function(req,res){
 	var id = req.params.id;
 	if(id){
 		Movie.findById(id,function(err,movie){
-			res.render('admin',{
-				title: '电影信息更新',
-				movie: movie
-			});
+			Category.find({},function(err,categories){
+				res.render('admin',{
+					title: '电影信息更新',
+					movie: movie,
+					categories: categories
+				});
+			});			
 		});
 	}
 }
