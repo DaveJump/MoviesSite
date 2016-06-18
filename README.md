@@ -1,5 +1,8 @@
 # MoviesSite
 a simple movies site for viewing and managing
+## Usage
+`npm install` to install all dependent packages
+`grunt` to run server
 ## Base Functions
 1. normal users
   * user signIn and signUp
@@ -7,6 +10,8 @@ a simple movies site for viewing and managing
 2. manager
   * manage movies,such as adding movie, modifying movies infos and delete movies
   * manage categories
-## usage
-`npm install` to install all dependent packages
-`grunt` to run server
+
+
+
+
+
