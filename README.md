@@ -1,8 +1,8 @@
 # MoviesSite
-a simple movies site for viewing and managing
+a simple movies site based on node + express + mongodb + jade  
 thanks imooc.com
 ## Usage
-`npm install` to install all dependent packages
+`npm install` to install all dependent packages  
 `grunt` to run server
 ## Base Functions
 1. normal users
