@@ -5,5 +5,8 @@ a simple movies site for viewing and managing
   * user signIn and signUp
   * viewing movies' detail
 2. manager
-  * manage movies,such as modifying movies infos and delete movies
+  * manage movies,such as adding movie, modifying movies infos and delete movies
   * manage categories
+## usage
+`npm install` to install all dependent packages
+`grunt` to run server
