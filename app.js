@@ -50,7 +50,8 @@ app.use(session({
 	})
 }));
 
-if('development' === app.get('env')){
+var env = process.env.NODE_ENV || 'dev';
+if('development' === env){
 	app.set('showStackError',true);
 	app.use(logger(':method :url :status'));
 	app.locals.pretty = true;
